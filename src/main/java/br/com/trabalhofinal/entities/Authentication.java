@@ -1,9 +1,34 @@
 package br.com.trabalhofinal.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "AUTHENTICATION")
 public class Authentication {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private Long customerAccountNumber;
 	private String customerPassword;
+	
+	public Authentication(Long customerAccountNumber, String customerPassword) {
+		this.customerAccountNumber = customerAccountNumber;
+		this.customerPassword = customerPassword;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public Long getCustomerAccountNumber() {
 		return customerAccountNumber;

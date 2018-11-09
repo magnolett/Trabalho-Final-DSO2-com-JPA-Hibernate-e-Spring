@@ -6,6 +6,14 @@ public abstract class Account {
 	private CustomerInfo customerInfo;
 	private Long accountBalance;
 	
+	public Account(Long accountNumber, Long accountBalance) {
+		this.accountNumber = accountNumber;
+		this.accountBalance = accountBalance;
+	}
+	
+	public Account() {
+	}
+	
 	public Long getAccountNumber() {
 		return accountNumber;
 	}
