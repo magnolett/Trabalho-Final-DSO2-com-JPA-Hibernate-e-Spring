@@ -1,11 +1,12 @@
-package br.com.trabalhofinal.dao;
+package br.com.trabalhofinal.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.trabalhofinal.entities.Authentication;
 import br.com.trabalhofinal.repository.AuthenticationRepository;
+import br.com.trabalhofinal.service.AuthenticationService;
 
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Autowired
 	AuthenticationRepository authenticationRepository;
@@ -18,7 +19,7 @@ public class AuthenticationServiceImpl {
 		authenticationRepository.delete(authentication);
 	}
 	
-	public Authentication getAuthById(Long authId) {
+	public Authentication findOne(Long authId) {
 		return authenticationRepository.findOne(authId);
 	}
 	

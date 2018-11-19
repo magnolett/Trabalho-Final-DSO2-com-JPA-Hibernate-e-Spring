@@ -1,12 +1,13 @@
-package br.com.trabalhofinal.dao;
+package br.com.trabalhofinal.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.trabalhofinal.entities.CheckingAccount;
 import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.repository.CustomerInfoRepository;
+import br.com.trabalhofinal.service.CustomerInfoService;
 
-public class CustomerInfoServiceImpl {
+public class CustomerInfoServiceImpl implements CustomerInfoService {
 
 	@Autowired
 	CustomerInfoRepository customerInfoRepository;
@@ -15,11 +16,11 @@ public class CustomerInfoServiceImpl {
 		customerInfoRepository.saveAndFlush(customerInfo);
 	}
 	
-	public void delete(Long customerInfoId) {
+	public void delete(CustomerInfo customerInfoId) {
 		customerInfoRepository.delete(customerInfoId);
 	}
 	
-	public CheckingAccount getAuthById(Long checkingAccountId) {
-		return customerInfoRepository.findOne(checkingAccountId);
+	public CustomerInfo findOne(Long customerInfoId) {
+		return customerInfoRepository.findOne(customerInfoId);
 	}
 }
