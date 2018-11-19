@@ -19,8 +19,8 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
 		checkingAccountRepository.delete(checkingAccount);
 	}
 	
-	public CheckingAccount findOne(Long checkingAccountId) {
-		return checkingAccountRepository.findOne(checkingAccountId);
+	public CheckingAccount findById(Long checkingAccountId) {
+		return checkingAccountRepository.findById(checkingAccountId).get();
 	}
 	
 }

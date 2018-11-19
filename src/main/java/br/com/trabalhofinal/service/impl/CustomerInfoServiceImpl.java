@@ -20,7 +20,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		customerInfoRepository.delete(customerInfoId);
 	}
 	
-	public CustomerInfo findOne(Long customerInfoId) {
-		return customerInfoRepository.findOne(customerInfoId);
+	public CustomerInfo findById(Long customerInfoId) {
+		return customerInfoRepository.findById(customerInfoId).get();
 	}
 }

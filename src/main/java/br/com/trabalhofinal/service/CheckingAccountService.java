@@ -6,5 +6,5 @@ public interface CheckingAccountService {
 
 	public void save(CheckingAccount checkingAccount);
 	public void delete(CheckingAccount checkingAccount);
-	public CheckingAccount findOne(Long checkingAccountId);
+	public CheckingAccount findById(Long checkingAccountId);
 }

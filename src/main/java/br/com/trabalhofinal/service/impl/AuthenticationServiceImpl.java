@@ -19,8 +19,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		authenticationRepository.delete(authentication);
 	}
 	
-	public Authentication findOne(Long authId) {
-		return authenticationRepository.findOne(authId);
+	public Authentication findById(Long authId) {
+		return authenticationRepository.findById(authId).get();
 	}
-	
 }

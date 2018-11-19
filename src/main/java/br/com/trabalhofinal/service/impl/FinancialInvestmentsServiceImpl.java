@@ -23,8 +23,8 @@ public class FinancialInvestmentsServiceImpl implements FinancialInvestmentsServ
 	}
 
 	@Override
-	public FinancialInvestments findOne(Long financialInvestmentsId) {
-		return financialInvestmentsRepository.findOne(financialInvestmentsId);
+	public FinancialInvestments findById(Long financialInvestmentsId) {
+		return financialInvestmentsRepository.findById(financialInvestmentsId).get();
 	}
 
 }

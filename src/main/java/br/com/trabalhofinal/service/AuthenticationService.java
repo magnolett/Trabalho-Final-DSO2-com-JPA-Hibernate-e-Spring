@@ -6,6 +6,6 @@ public interface AuthenticationService {
 
 	public void save(Authentication authentication);
 	public void delete(Authentication authentication);
-	public Authentication findOne(Long authenticationId);
+	public Authentication findById(Long authenticationId);
 	
 }

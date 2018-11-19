@@ -9,5 +9,4 @@ public class TrabalhoFinalWSApp {
 	public static void main(final String[] args) {
 		SpringApplication.run(TrabalhoFinalWSApp.class, args);
 	}
-
-	}
+}

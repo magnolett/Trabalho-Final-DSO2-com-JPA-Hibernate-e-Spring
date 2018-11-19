@@ -6,5 +6,5 @@ public interface CustomerInfoService {
 
 	public void save(CustomerInfo customerInfo);
 	public void delete(CustomerInfo customerInfo);
-	public CustomerInfo findOne(Long customerInfoId);	
+	public CustomerInfo findById(Long customerInfoId);	
 }

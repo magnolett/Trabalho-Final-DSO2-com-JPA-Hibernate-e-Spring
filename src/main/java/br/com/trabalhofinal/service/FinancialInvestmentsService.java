@@ -6,5 +6,5 @@ public interface FinancialInvestmentsService {
 
 	public void save(FinancialInvestments financialInvestments);
 	public void delete(FinancialInvestments financialInvestments);
-	public FinancialInvestments findOne(Long financialInvestmentsId);
+	public FinancialInvestments findById(Long financialInvestmentsId);
 }

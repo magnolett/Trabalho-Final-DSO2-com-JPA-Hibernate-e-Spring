@@ -22,8 +22,8 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	}
 
 	@Override
-	public SavingsAccount findOne(Long savingsAccountId) {
-		return savingsAccountRepository.findOne(savingsAccountId);
+	public SavingsAccount findById(Long savingsAccountId) {
+		return savingsAccountRepository.findById(savingsAccountId).get();
 	}
 
 }
