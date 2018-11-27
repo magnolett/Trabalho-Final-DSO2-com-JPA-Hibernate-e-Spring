@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "SAVINGS_ACCOUNT")
-public class SavingsAccount {
+public class SavingsAccount extends Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,9 +1,11 @@
 package br.com.trabalhofinal.entities;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Account {
 
 	private Long accountNumber;
-	private CustomerInfo customerInfo;
 	private Long accountBalance;
 	
 	public Account(Long accountNumber, Long accountBalance) {
@@ -20,12 +22,7 @@ public abstract class Account {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public CustomerInfo getCustomerInfo() {
-		return customerInfo;
-	}
-	public void setCustomerInfo(CustomerInfo customerInfo) {
-		this.customerInfo = customerInfo;
-	}
+
 	public Long getAccountBalance() {
 		return accountBalance;
 	}
