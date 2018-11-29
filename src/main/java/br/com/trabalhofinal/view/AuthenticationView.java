@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,12 +44,9 @@ public class AuthenticationView extends JFrame {
 	private JButton entrar;
 	private JButton limpar;
 
-	public AuthenticationView() {
-		initComponents();
-	}
-	
+	@PostConstruct
 	public void initComponents() {
-
+		
 		numeroConta = new JLabel("Número da Conta:");
 		inputConta = new JTextField(5);
 		senha = new JLabel("Senha:");
@@ -97,16 +95,14 @@ public class AuthenticationView extends JFrame {
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		pack();
 	}
 
-//	public void criaTela() {
-//		JFrame frame = new JFrame("Tela de Login");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().add(new AuthenticationView());
-//		frame.pack();
-//		frame.setVisible(true);
-
+	public void criaTela() {
+		setVisible(true);
+	}
 
 	public boolean validaContaESenha(final String accountNumber, final char[] accountPassword) {
 

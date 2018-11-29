@@ -33,8 +33,12 @@ public class Application implements CommandLineRunner{
 	@Autowired
 	private CustomerInfoService customerInfoService;
 	
+	@Autowired
+	private AuthenticationView authenticationView;
+	
 	@Override
 	public void run(String... args) throws Exception {
+		
 
 		CustomerInfo customerInfoCheck = new CustomerInfo("Marcos", "Vinicius", "11122233344", "Rua XY", "1000", 
 				AccountType.CHECKING_ACCOUNT);
@@ -51,17 +55,14 @@ public class Application implements CommandLineRunner{
 		savingsAccountService.save(savingsAccount);
 		checkingAccountService.save(checkingAccount);
 		
+		authenticationView.setVisible(true);
 		
 //		authenticationView.criaTela();
 		
 	}
 	
 	public static void main(final String[] args) {	
-
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-	    AuthenticationView appFrame = context.getBean(AuthenticationView.class);
-	    
-        appFrame.setVisible(true);
 		
 	}
 

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,11 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.AccountType;
+import br.com.trabalhofinal.entities.Authentication;
 import br.com.trabalhofinal.service.CustomerInfoService;
 
 @Component
 public class SavingsAccountView extends JFrame {
 
+	@Autowired
+	private AuthenticationView authenticationView;
+	
 	@Autowired
 	private CustomerInfoService customerInfoService;
 
@@ -29,11 +34,9 @@ public class SavingsAccountView extends JFrame {
     private JButton emiteExtrato;
     private JLabel contaPoupanca;
     private JButton depositar; 
+    private JButton voltar;
 
-    public SavingsAccountView() {
-    	initComponents();
-    }
-    
+    @PostConstruct
     public void initComponents() {
 
     	consultaInfo = new JButton ("Consultar Informações");
@@ -41,12 +44,22 @@ public class SavingsAccountView extends JFrame {
         emiteExtrato = new JButton ("Emitir Extrato");
         contaPoupanca = new JLabel ("Conta Poupança");
         depositar = new JButton ("Depositar");
+        voltar = new JButton("Logout");
 
         consultaInfo.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				customerInfoView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				setVisible(false);
+			}
+		});
+        
+        voltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				authenticationView.criaTela();
 				setVisible(false);
 			}
 		});
@@ -59,10 +72,12 @@ public class SavingsAccountView extends JFrame {
         add (emiteExtrato);
         add (contaPoupanca);
         add (depositar);
+        add (voltar);
 
+        voltar.setBounds (200, 210, 215, 30);
         consultaInfo.setBounds (55, 80, 215, 30);
         saca.setBounds (55, 150, 215, 30);
-        emiteExtrato.setBounds (200, 210, 215, 30);
+        emiteExtrato.setBounds (335, 150, 215, 30);
         contaPoupanca.setBounds (260, 20, 100, 25);
         depositar.setBounds (335, 80, 215, 30);
 
@@ -75,13 +90,6 @@ public class SavingsAccountView extends JFrame {
     }
     
     public void criaTela() {
-    	
-//        JFrame frame = new JFrame ("Painel de Conta Poupança");
-//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-//        frame.getContentPane().add (new CheckingAccountView());
-//        frame.pack();
-//        frame.setVisible (true);
-        initComponents();
         setVisible (true);
     }
 }

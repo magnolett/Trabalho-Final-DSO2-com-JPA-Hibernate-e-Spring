@@ -6,11 +6,13 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -37,13 +39,9 @@ public class FinancialInvestmentsView extends JFrame {
 	private JTextField mostraResultante;
 	private JButton menuAnterior;
 	
-	private double jurosMensal;
-	
-	public FinancialInvestmentsView() {
-		initComponents();
+	private Double jurosMensal;
 
-	}
-
+	@PostConstruct
 	public void initComponents() {
 		
 		realizarInvestimento = new JButton("Realizar Investimento ");
@@ -62,7 +60,7 @@ public class FinancialInvestmentsView extends JFrame {
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(rendaFixa);
 		buttonGroup.add(rendaVariavel);
-		
+
 		menuAnterior.addActionListener(new ActionListener() {
 			
 			@Override
@@ -93,20 +91,15 @@ public class FinancialInvestmentsView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(inputValorMensal.getText() != null && inputNumeroMeses != null) {
-					final Double valorMensal = Double.valueOf(inputValorMensal.getText());
-					final Double numeroMeses = Double.valueOf(inputNumeroMeses.getText());
-					final Double calculoResultante = valorMensal+((valorMensal * numeroMeses)/jurosMensal);
-
-					mostraResultante.setText(String.valueOf(calculoResultante));
-				}
+				final Double calculaInvestimento = calculaInvestimento(inputValorMensal.getText().trim(), inputNumeroMeses.getText().trim());
+				mostraResultante.setText(calculaInvestimento.toString());
+				
 			}
 		});
 		
-		
 		setPreferredSize(new Dimension(586, 400));
 		setLayout(null);
-
+		
 		add(realizarInvestimento);
 		add(tipoInvestimento);
 		add(calcular);
@@ -119,7 +112,7 @@ public class FinancialInvestmentsView extends JFrame {
 		add(valorResultante);
 		add(mostraResultante);
 		add(menuAnterior);
-
+		
 		realizarInvestimento.setBounds(200, 275, 220, 30);
 		tipoInvestimento.setBounds(230, 0, 170, 55);
 		calcular.setBounds(200, 170, 220, 30);
@@ -135,6 +128,7 @@ public class FinancialInvestmentsView extends JFrame {
 		
 		setLocation(640, 260);
 		
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		
@@ -143,13 +137,29 @@ public class FinancialInvestmentsView extends JFrame {
 	}
 
 	public void criaTela() {
-
-		// JFrame frame = new JFrame ("Painel de Conta Corrente");
-		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add (new CheckingAccountView());
-		// frame.pack();
-		initComponents();
 		setVisible(true);
-
 	}
+	
+	public Double calculaInvestimento(final String valorMensal, final String numeroMes) {
+		
+		try {
+			if(valorMensal != null && numeroMes != null) {
+				final Double valorMensalDouble = Double.valueOf(valorMensal);
+				final Double numeroMesesDouble = Double.valueOf(inputNumeroMeses.getText());
+				return valorMensalDouble+((valorMensalDouble * numeroMesesDouble)/jurosMensal);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Número de meses e valor mensal depositado precisam de preenchimento!");
+			}
+		} catch (Exception ex) {
+			if(ex instanceof NullPointerException) {
+				JOptionPane.showMessageDialog(null, "Número de meses e valor mensal depositado precisam de preenchimento!");
+			}
+		}
+		return null;
+		
+	}
+	
+	
+	
 }

@@ -1,9 +1,11 @@
 package br.com.trabalhofinal.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,11 +45,7 @@ public class CustomerInfoView extends JFrame {
 	
 	private CustomerInfo customerInfo;
 
-	public CustomerInfoView() {
-		initComponents();
-
-	}
-
+	@PostConstruct
 	public void initComponents() {
 		
 		nome = new JLabel("Nome");
@@ -62,6 +60,17 @@ public class CustomerInfoView extends JFrame {
 		showEndereco = new JTextField(10);
 		showRenda = new JTextField(5);
 
+		showNome.setEditable(false);
+		showNome.setDisabledTextColor(Color.WHITE);
+		showSobrenome.setEditable(false);
+		showSobrenome.setDisabledTextColor(Color.WHITE);
+		showCpf.setEditable(false);
+		showCpf.setDisabledTextColor(Color.WHITE);
+		showEndereco.setEditable(false);
+		showEndereco.setDisabledTextColor(Color.WHITE);
+		showRenda.setDisabledTextColor(Color.WHITE);
+		showRenda.setEditable(false);
+		
 		voltar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -117,8 +126,6 @@ public class CustomerInfoView extends JFrame {
 	public void criaTela(final CustomerInfo customerInfo) {
 
 		this.customerInfo = customerInfo;
-		
-		initComponents();
 		setVisible(true);
 		
 		showNome.setText(customerInfo.getCustomerName());

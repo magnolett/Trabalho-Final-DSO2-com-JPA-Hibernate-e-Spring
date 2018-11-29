@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,11 +22,7 @@ public class WithdrawView extends JFrame {
 	private JButton sacar;
 	private JButton voltar;
 
-	public WithdrawView() {
-		initComponents();
-
-	}
-
+	@PostConstruct
 	public void initComponents() {
 
 		realizaSaque = new JLabel("Realizar Saque");
@@ -58,13 +55,6 @@ public class WithdrawView extends JFrame {
 	}
 
 	public void criaTela() {
-
-		// JFrame frame = new JFrame ("Painel de Conta Corrente");
-		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add (new CheckingAccountView());
-		// frame.pack();
-		initComponents();
 		setVisible(true);
-
 	}
 }

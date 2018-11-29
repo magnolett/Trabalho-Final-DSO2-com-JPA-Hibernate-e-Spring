@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,10 +22,7 @@ public class ExtractView extends JFrame {
 	private JButton voltar;
 	private JComboBox selecione;
 
-	public ExtractView() {
-		initComponents();
-	}
-	
+	@PostConstruct
 	@SuppressWarnings("unchecked")
 	public void initComponents() {
 
@@ -62,12 +60,6 @@ public class ExtractView extends JFrame {
 	}
 
 	public void criaTela() {
-
-		// JFrame frame = new JFrame ("Painel de Conta Corrente");
-		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add (new CheckingAccountView());
-		// frame.pack();
-		initComponents();
 		setVisible(true);
 
 	}

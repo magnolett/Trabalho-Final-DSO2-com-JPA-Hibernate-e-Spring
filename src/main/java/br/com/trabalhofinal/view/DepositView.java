@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,10 +23,7 @@ public class DepositView extends JFrame {
 	private JButton depositar;
 	private JButton voltar;
 
-	public DepositView() {
-		initComponents();
-	}
-	
+	@PostConstruct
 	public void initComponents() {
 
 		realizaDeposito = new JLabel("Realizar Depósito");
@@ -58,14 +56,7 @@ public class DepositView extends JFrame {
 	}
 
 	public void criaTela() {
-
-		// JFrame frame = new JFrame ("Painel de Conta Corrente");
-		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add (new CheckingAccountView());
-		// frame.pack();
-		initComponents();
 		setVisible(true);
-
 	}
 
 }
