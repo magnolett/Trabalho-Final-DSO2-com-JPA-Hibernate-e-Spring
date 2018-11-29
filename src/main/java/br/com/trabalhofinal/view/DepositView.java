@@ -6,38 +6,38 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class DepositView extends JPanel {
     
-	private JLabel jcomp1;
-    private JLabel jcomp2;
-    private JPasswordField jcomp3;
-    private JButton jcomp4;
-    private JButton jcomp5;
+	private JLabel realizaDeposito;
+    private JLabel valorDeposito;
+    private JTextField inputDepoisto;
+    private JButton depositar;
+    private JButton voltar;
 
     public DepositView() {
 
-    	jcomp1 = new JLabel ("Realizar Depósito");
-        jcomp2 = new JLabel ("Valor a depositar:");
-        jcomp3 = new JPasswordField (5);
-        jcomp4 = new JButton ("Depositar");
-        jcomp5 = new JButton ("Voltar");
+    	realizaDeposito = new JLabel ("Realizar Depósito");
+        valorDeposito = new JLabel ("Valor a depositar:");
+        inputDepoisto = new JTextField (5);
+        depositar = new JButton ("Depositar");
+        voltar = new JButton ("Voltar");
 
         setPreferredSize (new Dimension (394, 177));
         setLayout (null);
 
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
+        add (realizaDeposito);
+        add (valorDeposito);
+        add (inputDepoisto);
+        add (depositar);
+        add (voltar);
 
-        jcomp1.setBounds (150, 0, 155, 25);
-        jcomp2.setBounds (150, 35, 125, 25);
-        jcomp3.setBounds (140, 70, 125, 20);
-        jcomp4.setBounds (95, 120, 100, 25);
-        jcomp5.setBounds (220, 120, 100, 25);
+        realizaDeposito.setBounds (150, 0, 155, 25);
+        valorDeposito.setBounds (150, 35, 125, 25);
+        inputDepoisto.setBounds (140, 70, 125, 20);
+        depositar.setBounds (95, 120, 100, 25);
+        voltar.setBounds (220, 120, 100, 25);
     }
     
     public void criaTela() {

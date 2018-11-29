@@ -6,38 +6,38 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class WithdrawView extends JPanel {
 
-    private JLabel jcomp1;
-    private JLabel jcomp2;
-    private JPasswordField jcomp3;
-    private JButton jcomp4;
-    private JButton jcomp5;
+    private JLabel realizaSaque;
+    private JLabel valorSaque;
+    private JTextField inputValorSaque;
+    private JButton sacar;
+    private JButton voltar;
 
     public WithdrawView() {
 
-    	jcomp1 = new JLabel ("Realizar Saque");
-        jcomp2 = new JLabel ("Valor a sacar:");
-        jcomp3 = new JPasswordField (5);
-        jcomp4 = new JButton ("Sacar");
-        jcomp5 = new JButton ("Voltar");
+    	realizaSaque = new JLabel ("Realizar Saque");
+        valorSaque = new JLabel ("Valor a sacar:");
+        inputValorSaque = new JTextField (5);
+        sacar = new JButton ("Sacar");
+        voltar = new JButton ("Voltar");
 
         setPreferredSize (new Dimension (394, 177));
         setLayout (null);
 
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
+        add (realizaSaque);
+        add (valorSaque);
+        add (inputValorSaque);
+        add (sacar);
+        add (voltar);
 
-        jcomp1.setBounds (150, 0, 155, 25);
-        jcomp2.setBounds (155, 35, 125, 25);
-        jcomp3.setBounds (135, 70, 125, 20);
-        jcomp4.setBounds (95, 120, 100, 25);
-        jcomp5.setBounds (220, 120, 100, 25);
+        realizaSaque.setBounds (150, 0, 155, 25);
+        valorSaque.setBounds (155, 35, 125, 25);
+        inputValorSaque.setBounds (135, 70, 125, 20);
+        sacar.setBounds (95, 120, 100, 25);
+        voltar.setBounds (220, 120, 100, 25);
     }
     
     public void criaTela() {

@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 
 public class ExtractView extends JPanel {
 
-    private JLabel jcomp1;
-    private JLabel jcomp2;
-    private JButton jcomp3;
-    private JButton jcomp4;
+    private JLabel emitirExtrato;
+    private JLabel selecionarMes;
+    private JButton emiteExtrato;
+    private JButton voltar;
     private JComboBox selecione;
 
     @SuppressWarnings("unchecked")
@@ -21,25 +21,25 @@ public class ExtractView extends JPanel {
 
     	String[] selecioneItems = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
 
-        jcomp1 = new JLabel ("Emitir Extrato");
-        jcomp2 = new JLabel ("Selecione o mês:");
-        jcomp3 = new JButton ("Emitir Extrato");
-        jcomp4 = new JButton ("Voltar");
+        emitirExtrato = new JLabel ("Emitir Extrato");
+        selecionarMes = new JLabel ("Selecione o mês:");
+        emiteExtrato = new JButton ("Emitir Extrato");
+        voltar = new JButton ("Voltar");
         selecione = new JComboBox (selecioneItems);
 
         setPreferredSize (new Dimension (394, 177));
         setLayout (null);
 
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
+        add (emitirExtrato);
+        add (selecionarMes);
+        add (emiteExtrato);
+        add (voltar);
         add (selecione);
 
-        jcomp1.setBounds (150, 0, 155, 25);
-        jcomp2.setBounds (145, 30, 125, 25);
-        jcomp3.setBounds (90, 120, 120, 25);
-        jcomp4.setBounds (220, 120, 100, 25);
+        emitirExtrato.setBounds (150, 0, 155, 25);
+        selecionarMes.setBounds (145, 30, 125, 25);
+        emiteExtrato.setBounds (90, 120, 120, 25);
+        voltar.setBounds (220, 120, 100, 25);
         selecione.setBounds (130, 65, 135, 30);
     }
     

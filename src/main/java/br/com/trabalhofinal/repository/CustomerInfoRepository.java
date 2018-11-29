@@ -7,7 +7,7 @@ import br.com.trabalhofinal.entities.CustomerInfo;
 
 public interface CustomerInfoRepository extends JpaRepository<CustomerInfo, Long> {
 
-	@Query("SELECT c FROM CustomerInfo c LEFT JOIN account a on p.account_id = a.id")
+	@Query("SELECT * FROM CustomerInfo c WHERE c.account.accountNumber = ?0")
 	public CustomerInfo findByAccountNumber(final String accountNumber);
 	
 }

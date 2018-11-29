@@ -2,10 +2,12 @@ package br.com.trabalhofinal.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,12 +32,9 @@ public class CustomerInfo {
 	
 	@Column
 	private String customerIncome;
-	
-	@OneToOne
-	private SavingsAccount savingsAccount;
-	
-	@OneToOne
-	private CheckingAccount checkingAccount;
+
+	@Enumerated
+	private AccountType accountType;
 	
 	public CustomerInfo(String customerName, String customerSurname, String customerCPF,
 			String customerStreetAddress, String customerIncome) {
@@ -47,21 +46,13 @@ public class CustomerInfo {
 		this.customerIncome = customerIncome;
 		
 	}
-	
-	public SavingsAccount getSavingsAccount() {
-		return savingsAccount;
+
+	public AccountType getAccountType() {
+		return accountType;
 	}
 	
-	public void setSavingsAccount(SavingsAccount savingsAccount) {
-		this.savingsAccount = savingsAccount;
-	}
-	
-	public CheckingAccount getCheckingAccount() {
-		return checkingAccount;
-	}
-	
-	public void setCheckingAccount(CheckingAccount checkingAccount) {
-		this.checkingAccount = checkingAccount;
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
 	}
 	
 	public Long getId() {

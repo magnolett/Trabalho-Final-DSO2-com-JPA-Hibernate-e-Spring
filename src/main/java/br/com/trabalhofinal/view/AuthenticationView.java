@@ -6,11 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.service.CustomerInfoService;
 
 public class AuthenticationView extends JPanel {
@@ -18,38 +18,38 @@ public class AuthenticationView extends JPanel {
 	@Autowired
 	private CustomerInfoService customerInfoService;
 	
-    private JLabel jcomp1;
-    private JTextField jcomp2;
-    private JLabel jcomp3;
-    private JTextField jcomp4;
-    private JButton jcomp5;
-    private JButton jcomp6;
+    private JLabel numeroConta;
+    private JTextField inputConta;
+    private JLabel senha;
+    private JPasswordField inputSenha;
+    private JButton entrar;
+    private JButton limpar;
 
     public AuthenticationView() {
 
-    	jcomp1 = new JLabel ("Número da Conta:");
-        jcomp2 = new JTextField (5);
-        jcomp3 = new JLabel ("Senha:");
-        jcomp4 = new JTextField (5);
-        jcomp5 = new JButton ("Entrar");
-        jcomp6 = new JButton ("Limpar");
+    	numeroConta = new JLabel ("Número da Conta:");
+        inputConta = new JTextField (5);
+        senha = new JLabel ("Senha:");
+        inputSenha = new JPasswordField (5);
+        entrar = new JButton ("Entrar");
+        limpar = new JButton ("Limpar");
 
         setPreferredSize (new Dimension (590, 261));
         setLayout (null);
 
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
-        add (jcomp6);
+        add (numeroConta);
+        add (inputConta);
+        add (senha);
+        add (inputSenha);
+        add (entrar);
+        add (limpar);
 
-        jcomp1.setBounds (235, 40, 120, 20);
-        jcomp2.setBounds (220, 65, 135, 20);
-        jcomp3.setBounds (260, 90, 100, 25);
-        jcomp4.setBounds (220, 115, 135, 20);
-        jcomp5.setBounds (175, 175, 100, 25);
-        jcomp6.setBounds (300, 175, 100, 25);
+        numeroConta.setBounds (235, 40, 120, 20);
+        inputConta.setBounds (220, 65, 135, 20);
+        senha.setBounds (260, 90, 100, 25);
+        inputSenha.setBounds (220, 115, 135, 20);
+        entrar.setBounds (175, 175, 100, 25);
+        limpar.setBounds (300, 175, 100, 25);
     }
     
     public void criaTela() {

@@ -9,38 +9,38 @@ import javax.swing.JPanel;
 
 public class CheckingAccountView extends JPanel {
 
-    private JButton jcomp1;
-    private JButton jcomp2;
-    private JButton jcomp3;
-    private JLabel jcomp4;
-    private JButton jcomp5;
-    private JButton jcomp6;
+    private JButton consulta;
+    private JButton calculadora;
+    private JButton sacar;
+    private JLabel contaCorrente;
+    private JButton emitirExtrato;
+    private JButton depositar;
 
     public CheckingAccountView() {
 
-    	jcomp1 = new JButton ("Consultar Informações");
-        jcomp2 = new JButton ("Calculadora de Investimentos");
-        jcomp3 = new JButton ("Sacar");
-        jcomp4 = new JLabel ("Conta Corrente");
-        jcomp5 = new JButton ("Emitir Extrato");
-        jcomp6 = new JButton ("Depositar");
+    	consulta = new JButton ("Consultar Informações");
+        calculadora = new JButton ("Calculadora de Investimentos");
+        sacar = new JButton ("Sacar");
+        contaCorrente = new JLabel ("Conta Corrente");
+        emitirExtrato = new JButton ("Emitir Extrato");
+        depositar = new JButton ("Depositar");
 
         setPreferredSize (new Dimension (599, 279));
         setLayout (null);
 
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
-        add (jcomp6);
+        add (consulta);
+        add (calculadora);
+        add (sacar);
+        add (contaCorrente);
+        add (emitirExtrato);
+        add (depositar);
 
-        jcomp1.setBounds (55, 80, 215, 30);
-        jcomp2.setBounds (55, 150, 215, 30);
-        jcomp3.setBounds (200, 210, 215, 30);
-        jcomp4.setBounds (260, 20, 100, 25);
-        jcomp5.setBounds (335, 80, 215, 30);
-        jcomp6.setBounds (335, 150, 215, 30);
+        consulta.setBounds (55, 80, 215, 30);
+        calculadora.setBounds (55, 150, 215, 30);
+        sacar.setBounds (200, 210, 215, 30);
+        contaCorrente.setBounds (260, 20, 100, 25);
+        emitirExtrato.setBounds (335, 80, 215, 30);
+        depositar.setBounds (335, 150, 215, 30);
     }
     
     public void criaTela() {
