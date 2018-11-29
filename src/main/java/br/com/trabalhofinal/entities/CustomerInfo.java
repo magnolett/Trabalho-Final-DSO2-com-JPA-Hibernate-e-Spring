@@ -6,12 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import br.com.trabalhofinal.repository.CustomerInfoRepository;
 
 @Entity
 @Table(name = "CUSTOMER_INFORMATION")
@@ -34,22 +29,26 @@ public class CustomerInfo {
 	private String customerStreetAddress;
 	
 	@Column
-	private Long customerIncome;
+	private String customerIncome;
 
+	@Column
 	@Enumerated
 	private AccountType accountType;
 	
 	public CustomerInfo(String customerName, String customerSurname, String customerCPF,
-			String customerStreetAddress, Long customerIncome) {
+			String customerStreetAddress, String customerIncome, AccountType accountType) {
 		
 		this.customerName = customerName;
 		this.customerSurname = customerSurname;
 		this.customerCPF = customerCPF;
 		this.customerStreetAddress = customerStreetAddress;
 		this.customerIncome = customerIncome;
+		this.accountType = accountType;
 		
 	}
 
+	public CustomerInfo() {}
+	
 	public AccountType getAccountType() {
 		return accountType;
 	}
@@ -90,10 +89,10 @@ public class CustomerInfo {
 	public void setCustomerStreetAddress(String customerStreetAddress) {
 		this.customerStreetAddress = customerStreetAddress;
 	}
-	public Long getCustomerIncome() {
+	public String getCustomerIncome() {
 		return customerIncome;
 	}
-	public void setCustomerIncome(Long customerIncome) {
+	public void setCustomerIncome(String customerIncome) {
 		this.customerIncome = customerIncome;
 	}
 	

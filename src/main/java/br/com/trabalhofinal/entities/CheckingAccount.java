@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,13 +25,25 @@ public class CheckingAccount {
 	@Column
 	private Long accountBalance;
 	
-	public CheckingAccount(String accountNumber, String accountPassword, Long accountBalance) {
+	@OneToOne
+	private CustomerInfo customerInfo;
+	
+	public CheckingAccount(String accountNumber, String accountPassword, Long accountBalance, CustomerInfo customerInfo) {
 		this.accountBalance = accountBalance;
 		this.accountNumber = accountNumber;
 		this.accountPassword = accountPassword;
+		this.customerInfo = customerInfo;
 	}
 	
 	public CheckingAccount() {}
+	
+	public CustomerInfo getCustomerInfo() {
+		return customerInfo;
+	}
+	
+	public void setCustomerInfo(CustomerInfo customerInfo) {
+		this.customerInfo = customerInfo;
+	}
 	
 	public String getAccountPassword() {
 		return accountPassword;

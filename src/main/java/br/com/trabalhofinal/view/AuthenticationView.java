@@ -4,11 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -17,20 +17,22 @@ import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.AccountType;
 import br.com.trabalhofinal.service.CheckingAccountService;
-import br.com.trabalhofinal.service.CustomerInfoService;
 import br.com.trabalhofinal.service.SavingsAccountService;
 
 @Component
-public class AuthenticationView extends JPanel {
-
-	@Autowired
-	private CustomerInfoService customerInfoService;
+public class AuthenticationView extends JFrame {
 
 	@Autowired
 	private CheckingAccountService checkingAccountService;
 
 	@Autowired
 	private SavingsAccountService savingsAccountService;
+	
+	@Autowired
+	private CheckingAccountView checkingAccountView;
+
+	@Autowired
+	private SavingsAccountView savingsAccountView;
 	
 	private JLabel numeroConta;
 	private JTextField inputConta;
@@ -40,6 +42,10 @@ public class AuthenticationView extends JPanel {
 	private JButton limpar;
 
 	public AuthenticationView() {
+		initComponents();
+	}
+	
+	public void initComponents() {
 
 		numeroConta = new JLabel("Número da Conta:");
 		inputConta = new JTextField(5);
@@ -82,16 +88,20 @@ public class AuthenticationView extends JPanel {
 		inputSenha.setBounds(220, 115, 135, 20);
 		entrar.setBounds(175, 175, 100, 25);
 		limpar.setBounds(300, 175, 100, 25);
+		
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(groupLayout);
+		
+		pack();
 	}
 
-	public void criaTela() {
-		JFrame frame = new JFrame("Tela de Login");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new AuthenticationView());
-		frame.pack();
-		frame.setVisible(true);
+//	public void criaTela() {
+//		JFrame frame = new JFrame("Tela de Login");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().add(new AuthenticationView());
+//		frame.pack();
+//		frame.setVisible(true);
 
-	}
 
 	public void validaContaESenha(final String accountNumber, final char[] accountPassword) {
 
@@ -103,11 +113,14 @@ public class AuthenticationView extends JPanel {
 				validaTipoConta(AccountType.CHECKING_ACCOUNT);
 			} else if (savingsAccountService.findByAccountNumberAndPassword(accountNumber, password) != null) {
 				validaTipoConta(AccountType.SAVINGS_ACCOUNT);
+			} else {
+			JOptionPane.showMessageDialog(null,
+					"O número da conta não está relacionado" + " à senha! Favor tentar novamente.");
 			}
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			if (e instanceof NullPointerException) {
 				JOptionPane.showMessageDialog(null,
-						"O número da conta não está relacionado" + "à senha! Favor tentar novamente.");
+						"O número da conta não está relacionado" + " à senha! Favor tentar novamente.");
 			} else {
 				e.printStackTrace();
 				System.out.println("Erro de sistema.");
@@ -118,9 +131,9 @@ public class AuthenticationView extends JPanel {
 	public void validaTipoConta(final AccountType accountType) {
 
 		if (accountType.equals(AccountType.CHECKING_ACCOUNT)) {
-//			new CheckingAccountView().criaTela();
+			checkingAccountView.criaTela();
 		} else {
-//			new SavingsAccountView().criaTela();
+			savingsAccountView.criaTela();
 		}
 	}
 }

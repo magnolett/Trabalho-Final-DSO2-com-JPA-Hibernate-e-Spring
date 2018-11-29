@@ -37,6 +37,8 @@ public class FinancialInvestments {
 		this.investmentType = investmentType;
 	}
 	
+	public FinancialInvestments() {}
+	
 	public CheckingAccount getCheckingAccount() {
 		return checkingAccount;
 	}

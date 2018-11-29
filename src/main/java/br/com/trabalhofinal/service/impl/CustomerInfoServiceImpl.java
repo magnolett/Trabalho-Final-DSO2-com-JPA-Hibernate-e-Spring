@@ -3,6 +3,7 @@ package br.com.trabalhofinal.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.trabalhofinal.entities.AccountType;
 import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.repository.CustomerInfoRepository;
 import br.com.trabalhofinal.service.CustomerInfoService;
@@ -23,5 +24,10 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
 	public CustomerInfo findById(Long customerInfoId) {
 		return customerInfoRepository.findById(customerInfoId).get();
+	}
+
+	@Override
+	public CustomerInfo findCustomerByAccountType(AccountType accountType) {
+		return customerInfoRepository.findCustomerByAccountType(accountType);
 	}
 }

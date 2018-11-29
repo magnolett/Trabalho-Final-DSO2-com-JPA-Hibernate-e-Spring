@@ -1,14 +1,29 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class CheckingAccountView extends JPanel {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import br.com.trabalhofinal.entities.AccountType;
+import br.com.trabalhofinal.service.CustomerInfoService;
+
+@Component
+public class CheckingAccountView extends JFrame {
+
+	@Autowired
+	private CustomerInfoView customerInfoView;
+	
+	@Autowired
+	private CustomerInfoService customerInfoService;
+	
     private JButton consulta;
     private JButton calculadora;
     private JButton sacar;
@@ -17,6 +32,11 @@ public class CheckingAccountView extends JPanel {
     private JButton depositar;
 
     public CheckingAccountView() {
+    	initComponents();
+
+    }
+    
+    public void initComponents() {
 
     	consulta = new JButton ("Consultar Informações");
         calculadora = new JButton ("Calculadora de Investimentos");
@@ -25,6 +45,14 @@ public class CheckingAccountView extends JPanel {
         emitirExtrato = new JButton ("Emitir Extrato");
         depositar = new JButton ("Depositar");
 
+        consulta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				customerInfoView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+			}
+		});
+        
         setPreferredSize (new Dimension (599, 279));
         setLayout (null);
 
@@ -41,15 +69,22 @@ public class CheckingAccountView extends JPanel {
         contaCorrente.setBounds (260, 20, 100, 25);
         emitirExtrato.setBounds (335, 80, 215, 30);
         depositar.setBounds (335, 150, 215, 30);
+    
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(groupLayout);
+		
+		pack();
+		
     }
     
     public void criaTela() {
     	
-        JFrame frame = new JFrame ("Painel de Conta Corrente");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new CheckingAccountView());
-        frame.pack();
-        frame.setVisible (true);
+//        JFrame frame = new JFrame ("Painel de Conta Corrente");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new CheckingAccountView());
+//        frame.pack();
+    initComponents();
+    setVisible (true);
     	
     }
 	

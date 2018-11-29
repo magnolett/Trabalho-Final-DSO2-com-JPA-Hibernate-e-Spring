@@ -2,53 +2,69 @@ package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class ExtractView extends JPanel {
+import org.springframework.stereotype.Component;
 
-    private JLabel emitirExtrato;
-    private JLabel selecionarMes;
-    private JButton emiteExtrato;
-    private JButton voltar;
-    private JComboBox selecione;
+@Component
+public class ExtractView extends JFrame {
 
-    @SuppressWarnings("unchecked")
+	private JLabel emitirExtrato;
+	private JLabel selecionarMes;
+	private JButton emiteExtrato;
+	private JButton voltar;
+	private JComboBox selecione;
+
 	public ExtractView() {
+		initComponents();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void initComponents() {
 
-    	String[] selecioneItems = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+		String[] selecioneItems = { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
+				"Setembro", "Outubro", "Novembro", "Dezembro" };
 
-        emitirExtrato = new JLabel ("Emitir Extrato");
-        selecionarMes = new JLabel ("Selecione o mês:");
-        emiteExtrato = new JButton ("Emitir Extrato");
-        voltar = new JButton ("Voltar");
-        selecione = new JComboBox (selecioneItems);
+		emitirExtrato = new JLabel("Emitir Extrato");
+		selecionarMes = new JLabel("Selecione o mês:");
+		emiteExtrato = new JButton("Emitir Extrato");
+		voltar = new JButton("Voltar");
+		selecione = new JComboBox(selecioneItems);
 
-        setPreferredSize (new Dimension (394, 177));
-        setLayout (null);
+		setPreferredSize(new Dimension(394, 177));
+		setLayout(null);
 
-        add (emitirExtrato);
-        add (selecionarMes);
-        add (emiteExtrato);
-        add (voltar);
-        add (selecione);
+		add(emitirExtrato);
+		add(selecionarMes);
+		add(emiteExtrato);
+		add(voltar);
+		add(selecione);
 
-        emitirExtrato.setBounds (150, 0, 155, 25);
-        selecionarMes.setBounds (145, 30, 125, 25);
-        emiteExtrato.setBounds (90, 120, 120, 25);
-        voltar.setBounds (220, 120, 100, 25);
-        selecione.setBounds (130, 65, 135, 30);
-    }
-    
-    public void criaTela() {
-    	
-        JFrame frame = new JFrame ("MyPanel");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new ExtractView());
-        frame.pack();
-        frame.setVisible (true);
-    }
+		emitirExtrato.setBounds(150, 0, 155, 25);
+		selecionarMes.setBounds(145, 30, 125, 25);
+		emiteExtrato.setBounds(90, 120, 120, 25);
+		voltar.setBounds(220, 120, 100, 25);
+		selecione.setBounds(130, 65, 135, 30);
+		
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(groupLayout);
+		
+		
+		pack();
+	}
+
+	public void criaTela() {
+
+		// JFrame frame = new JFrame ("Painel de Conta Corrente");
+		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		// frame.getContentPane().add (new CheckingAccountView());
+		// frame.pack();
+		initComponents();
+		setVisible(true);
+
+	}
 }

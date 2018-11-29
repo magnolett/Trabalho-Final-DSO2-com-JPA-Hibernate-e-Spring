@@ -26,6 +26,8 @@ public class Authentication {
 		this.customerPassword = customerPassword;
 	}
 
+	public Authentication() {}
+	
 	public Long getId() {
 		return id;
 	}

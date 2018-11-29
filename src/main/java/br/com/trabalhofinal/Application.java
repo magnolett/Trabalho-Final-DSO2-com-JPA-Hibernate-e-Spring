@@ -1,10 +1,7 @@
 package br.com.trabalhofinal;
 
-import java.awt.EventQueue;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,6 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import br.com.trabalhofinal.entities.AccountType;
 import br.com.trabalhofinal.entities.CheckingAccount;
 import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.entities.SavingsAccount;
@@ -38,14 +36,22 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 
-	    SavingsAccount savingsAccount = new SavingsAccount("123", "123", 6000l);
-		CheckingAccount checkingAccount = new CheckingAccount("abc", "abc", 10000l);
-		CustomerInfo customerInfo = new CustomerInfo("Marcos", "Vinicius", "11122233344", "Rua XY", 500l);
+		CustomerInfo customerInfoCheck = new CustomerInfo("Marcos", "Vinicius", "11122233344", "Rua XY", "1000", 
+				AccountType.CHECKING_ACCOUNT);
 		
+		CustomerInfo customerInfoSavings = new CustomerInfo("Luiz", "Fernando", "44433322211", "Rua YX", "5000", 
+				AccountType.SAVINGS_ACCOUNT);
+		
+		SavingsAccount savingsAccount = new SavingsAccount("123", "123", 6000l, customerInfoCheck);
+		CheckingAccount checkingAccount = new CheckingAccount("abc", "abc", 10000l, customerInfoSavings);
+		
+		customerInfoService.save(customerInfoCheck);
+		customerInfoService.save(customerInfoSavings);
+
 		savingsAccountService.save(savingsAccount);
 		checkingAccountService.save(checkingAccount);
-		customerInfoService.save(customerInfo);
-
+		
+		
 //		authenticationView.criaTela();
 		
 	}
@@ -54,8 +60,8 @@ public class Application implements CommandLineRunner{
 
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
 	    AuthenticationView appFrame = context.getBean(AuthenticationView.class);
+	    
         appFrame.setVisible(true);
-        appFrame.criaTela();
 		
 	}
 
