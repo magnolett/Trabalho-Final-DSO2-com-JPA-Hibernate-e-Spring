@@ -35,6 +35,7 @@ public class CheckingAccountView extends JFrame {
 	private JLabel contaCorrente;
 	private JButton emitirExtrato;
 	private JButton depositar;
+	private JButton logout;
 
 	public CheckingAccountView() {
 		initComponents();
@@ -49,6 +50,7 @@ public class CheckingAccountView extends JFrame {
 		contaCorrente = new JLabel("Conta Corrente");
 		emitirExtrato = new JButton("Emitir Extrato");
 		depositar = new JButton("Depositar");
+		logout = new JButton("Logout");
 
 		consulta.addActionListener(new ActionListener() {
 
