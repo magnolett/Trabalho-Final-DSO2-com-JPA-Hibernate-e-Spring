@@ -1,6 +1,8 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -46,6 +48,8 @@ public class WithdrawView extends JFrame {
 		inputValorSaque.setBounds(135, 70, 125, 20);
 		sacar.setBounds(95, 120, 100, 25);
 		voltar.setBounds(220, 120, 100, 25);
+
+		setLocation(640, 260);
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);

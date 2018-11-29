@@ -1,18 +1,29 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.trabalhofinal.entities.AccountType;
+import br.com.trabalhofinal.service.CustomerInfoService;
 
 @Component
 public class SavingsAccountView extends JFrame {
 
+	@Autowired
+	private CustomerInfoService customerInfoService;
+
+	@Autowired
+	private CustomerInfoView customerInfoView;
+	
     private JButton consultaInfo;
     private JButton saca;
     private JButton emiteExtrato;
@@ -31,7 +42,16 @@ public class SavingsAccountView extends JFrame {
         contaPoupanca = new JLabel ("Conta Poupança");
         depositar = new JButton ("Depositar");
 
-        setPreferredSize (new Dimension (599, 279));
+        consultaInfo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				customerInfoView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				setVisible(false);
+			}
+		});
+        
+        setPreferredSize (new Dimension (599, 300));
         setLayout (null);
 
         add (consultaInfo);
@@ -45,7 +65,9 @@ public class SavingsAccountView extends JFrame {
         emiteExtrato.setBounds (200, 210, 215, 30);
         contaPoupanca.setBounds (260, 20, 100, 25);
         depositar.setBounds (335, 80, 215, 30);
-    
+
+		setLocation(640, 260);
+
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		

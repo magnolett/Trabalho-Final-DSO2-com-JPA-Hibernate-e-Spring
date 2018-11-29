@@ -1,6 +1,8 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,7 +60,8 @@ public class AuthenticationView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				validaContaESenha(inputConta.getText(), inputSenha.getPassword());
+				boolean screenValidation = validaContaESenha(inputConta.getText(), inputSenha.getPassword());
+				setVisible(screenValidation);
 			}
 		});
 
@@ -89,6 +92,8 @@ public class AuthenticationView extends JFrame {
 		entrar.setBounds(175, 175, 100, 25);
 		limpar.setBounds(300, 175, 100, 25);
 		
+		setLocation(640, 260);
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		
@@ -103,7 +108,7 @@ public class AuthenticationView extends JFrame {
 //		frame.setVisible(true);
 
 
-	public void validaContaESenha(final String accountNumber, final char[] accountPassword) {
+	public boolean validaContaESenha(final String accountNumber, final char[] accountPassword) {
 
 		try {
 
@@ -111,11 +116,14 @@ public class AuthenticationView extends JFrame {
 			
 			if (checkingAccountService.findByAccountNumberAndPassword(accountNumber, password) != null) {
 				validaTipoConta(AccountType.CHECKING_ACCOUNT);
+				return false;
 			} else if (savingsAccountService.findByAccountNumberAndPassword(accountNumber, password) != null) {
 				validaTipoConta(AccountType.SAVINGS_ACCOUNT);
+				return false;
 			} else {
-			JOptionPane.showMessageDialog(null,
-					"O número da conta não está relacionado" + " à senha! Favor tentar novamente.");
+				JOptionPane.showMessageDialog(null,
+						"O número da conta não está relacionado" + " à senha! Favor tentar novamente.");
+				return true;
 			}
 		} catch (Exception e) { 
 			if (e instanceof NullPointerException) {
@@ -126,6 +134,7 @@ public class AuthenticationView extends JFrame {
 				System.out.println("Erro de sistema.");
 			}
 		}
+		return true;
 	}
 
 	public void validaTipoConta(final AccountType accountType) {

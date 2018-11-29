@@ -1,6 +1,8 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,6 +22,12 @@ public class CustomerInfoView extends JFrame {
 
 	@Autowired
 	private CustomerInfoService customerInfoService;
+	
+	@Autowired
+	private CheckingAccountView checkingAccountView;
+
+	@Autowired
+	private SavingsAccountView savingsAccountView;
 	
 	private JLabel nome;
 	private JLabel sobrenome;
@@ -41,7 +49,7 @@ public class CustomerInfoView extends JFrame {
 	}
 
 	public void initComponents() {
-		// construct components
+		
 		nome = new JLabel("Nome");
 		sobrenome = new JLabel("Sobrenome");
 		cpf = new JLabel("CPF");
@@ -49,25 +57,29 @@ public class CustomerInfoView extends JFrame {
 		renda = new JLabel("Renda Cadastrada");
 		voltar = new JButton("Voltar");
 		showNome = new JTextField(5);
-		showSobrenome = new JTextField(5);
-		showCpf = new JTextField(5);
-		showEndereco = new JTextField(5);
+		showSobrenome = new JTextField(10);
+		showCpf = new JTextField(10);
+		showEndereco = new JTextField(10);
 		showRenda = new JTextField(5);
 
-		setPreferredSize(new Dimension(482, 283));
+		voltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
+					checkingAccountView.criaTela();
+					setVisible(false);
+				} else if(customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)) {
+					savingsAccountView.criaTela();
+					setVisible(false);
+				} else {
+					System.out.println("Erro ao identificar tipo de conta.");
+				}
+			}
+		});
+		
+		setPreferredSize(new Dimension(482, 310));
 		setLayout(null);
-
-		add(nome);
-		add(sobrenome);
-		add(cpf);
-		add(endereco);
-		add(renda);
-		add(voltar);
-		add(showNome);
-		add(showSobrenome);
-		add(showCpf);
-		add(showEndereco);
-		add(showRenda);
 
 		nome.setBounds(95, 10, 100, 25);
 		sobrenome.setBounds(80, 75, 100, 25);
@@ -80,6 +92,20 @@ public class CustomerInfoView extends JFrame {
 		showCpf.setBounds(65, 180, 100, 25);
 		showEndereco.setBounds(330, 75, 100, 25);
 		showRenda.setBounds(335, 160, 100, 25);
+
+		add(nome);
+		add(sobrenome);
+		add(cpf);
+		add(endereco);
+		add(renda);
+		add(voltar);
+		add(showNome);
+		add(showSobrenome);
+		add(showCpf);
+		add(showEndereco);
+		add(showRenda);
+		
+		setLocation(640, 260);
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
@@ -90,24 +116,24 @@ public class CustomerInfoView extends JFrame {
 
 	public void criaTela(final CustomerInfo customerInfo) {
 
-		// JFrame frame = new JFrame ("Painel de Conta Corrente");
-		// frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add (new CheckingAccountView());
-		// frame.pack();
+		this.customerInfo = customerInfo;
+		
 		initComponents();
 		setVisible(true);
 		
 		showNome.setText(customerInfo.getCustomerName());
 		showSobrenome.setText(customerInfo.getCustomerSurname());
-		showCpf.setText(customerInfo.getCustomerCPF());
+		showCpf.setText(numberToCpfFormatter(customerInfo.getCustomerCPF()));
 		showEndereco.setText(customerInfo.getCustomerStreetAddress());
-		showRenda.setText(customerInfo.getCustomerIncome().toString());
+		showRenda.setText("R$ "+customerInfo.getCustomerIncome().toString());
 	}
 	
 	public CustomerInfo carregaCustomer(final AccountType accountType) {
 		return customerInfoService.findCustomerByAccountType(accountType);
-		
-		
 	}
+	
+   public static String numberToCpfFormatter(final String cpf) {  
+		return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");		
+	 }
 
 }

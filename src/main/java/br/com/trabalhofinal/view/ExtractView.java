@@ -1,6 +1,8 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -49,6 +51,8 @@ public class ExtractView extends JFrame {
 		emiteExtrato.setBounds(90, 120, 120, 25);
 		voltar.setBounds(220, 120, 100, 25);
 		selecione.setBounds(130, 65, 135, 30);
+
+		setLocation(640, 260);
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
