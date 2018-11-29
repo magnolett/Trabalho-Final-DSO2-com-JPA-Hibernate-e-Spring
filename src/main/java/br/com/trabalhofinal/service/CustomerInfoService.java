@@ -7,4 +7,4 @@ public interface CustomerInfoService {
 	public void save(CustomerInfo customerInfo);
 	public void delete(CustomerInfo customerInfo);
 	public CustomerInfo findById(Long customerInfoId);	
-}
+}	

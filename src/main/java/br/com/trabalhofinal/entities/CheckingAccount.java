@@ -16,11 +16,30 @@ public class CheckingAccount {
 	private Long id;
 	
 	@Column
-	private Long accountNumber;
+	private String accountNumber;
 	
 	@Column
-	private Long accountBalance;
+	private String accountPassword;
 
+	@Column
+	private Long accountBalance;
+	
+	public CheckingAccount(String accountNumber, String accountPassword, Long accountBalance) {
+		this.accountBalance = accountBalance;
+		this.accountNumber = accountNumber;
+		this.accountPassword = accountPassword;
+	}
+	
+	public CheckingAccount() {}
+	
+	public String getAccountPassword() {
+		return accountPassword;
+	}
+	
+	public void setAccountPassword(String accountPassword) {
+		this.accountPassword = accountPassword;
+	}
+	
 	public Long getAccountBalance() {
 		return accountBalance;
 	}
@@ -29,11 +48,11 @@ public class CheckingAccount {
 		this.accountBalance = accountBalance;
 	}
 	
-	public Long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 	
-	public void setAccountNumber(Long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	

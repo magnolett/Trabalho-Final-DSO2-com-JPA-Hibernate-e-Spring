@@ -7,5 +7,7 @@ public interface SavingsAccountService {
 	public void save(SavingsAccount savingsAccount);
 	public void delete(SavingsAccount savingsAccount);
 	public SavingsAccount findById(Long savingsAccountService);	
+	public SavingsAccount findByAccountNumberAndPassword(final String accountNumber, final String accountPassword);	
+
 	
 }

@@ -6,9 +6,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.trabalhofinal.repository.CustomerInfoRepository;
 
 @Entity
 @Table(name = "CUSTOMER_INFORMATION")
@@ -31,13 +34,13 @@ public class CustomerInfo {
 	private String customerStreetAddress;
 	
 	@Column
-	private String customerIncome;
+	private Long customerIncome;
 
 	@Enumerated
 	private AccountType accountType;
 	
 	public CustomerInfo(String customerName, String customerSurname, String customerCPF,
-			String customerStreetAddress, String customerIncome) {
+			String customerStreetAddress, Long customerIncome) {
 		
 		this.customerName = customerName;
 		this.customerSurname = customerSurname;
@@ -87,10 +90,10 @@ public class CustomerInfo {
 	public void setCustomerStreetAddress(String customerStreetAddress) {
 		this.customerStreetAddress = customerStreetAddress;
 	}
-	public String getCustomerIncome() {
+	public Long getCustomerIncome() {
 		return customerIncome;
 	}
-	public void setCustomerIncome(String customerIncome) {
+	public void setCustomerIncome(Long customerIncome) {
 		this.customerIncome = customerIncome;
 	}
 	
