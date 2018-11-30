@@ -1,8 +1,6 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,19 @@ public class CheckingAccountView extends JFrame {
 	
 	@Autowired
 	private FinancialInvestmentsView financialInvestmentsView;
+	
+	@Autowired
+	private AuthenticationView authenticationView;
 
+	@Autowired
+	private WithdrawView withdrawView;
+	
+	@Autowired
+	private DepositView depositView;
+	
+	@Autowired
+	private ExtractView extractView;
+	
 	private JButton consulta;
 	private JButton calculadora;
 	private JButton sacar;
@@ -52,6 +63,43 @@ public class CheckingAccountView extends JFrame {
 		depositar = new JButton("Depositar");
 		logout = new JButton("Logout");
 
+		emitirExtrato.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Função ainda não implementada!" );
+			}
+		});
+		
+		depositar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				depositView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+				setVisible(false);
+				
+			}
+		});
+		
+		sacar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				withdrawView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+				setVisible(false);
+				
+			}
+		});
+		
+		logout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				authenticationView.criaTela();
+				setVisible(false);
+			}
+		});
+		
 		consulta.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,10 +124,11 @@ public class CheckingAccountView extends JFrame {
 
 		consulta.setBounds(55, 80, 215, 30);
 		calculadora.setBounds(55, 150, 215, 30);
-		sacar.setBounds(200, 210, 215, 30);
+		sacar.setBounds(55, 210, 215, 30);
 		contaCorrente.setBounds(260, 20, 100, 25);
 		emitirExtrato.setBounds(335, 80, 215, 30);
 		depositar.setBounds(335, 150, 215, 30);
+		logout.setBounds(335, 210, 215, 30);
 
 		add(consulta);
 		add(calculadora);
@@ -87,9 +136,12 @@ public class CheckingAccountView extends JFrame {
 		add(contaCorrente);
 		add(emitirExtrato);
 		add(depositar);
+		add(logout);
 
 		setLocation(640, 260);
 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 

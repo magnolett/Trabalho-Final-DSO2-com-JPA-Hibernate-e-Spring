@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.CheckingAccount;
+import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.repository.CheckingAccountRepository;
 import br.com.trabalhofinal.service.CheckingAccountService;
 
@@ -28,6 +29,11 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
 	public CheckingAccount findByAccountNumberAndPassword(final String accountNumber, final String accountPassword) {
 		return checkingAccountRepository.findByAccountNumberAndPassword(accountNumber, accountPassword);
 		
+	}
+
+	@Override
+	public CheckingAccount findByCostumerInfo(Long customerInfoId) {
+		return checkingAccountRepository.findByCostumerInfo(customerInfoId);
 	}
 
 }

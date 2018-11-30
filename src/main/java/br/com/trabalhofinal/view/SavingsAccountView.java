@@ -9,6 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,15 @@ public class SavingsAccountView extends JFrame {
 	@Autowired
 	private CustomerInfoView customerInfoView;
 	
+	@Autowired
+	private WithdrawView withdrawView;
+	
+	@Autowired
+	private DepositView depositView;
+	
+	@Autowired
+	private ExtractView extractView;
+	
     private JButton consultaInfo;
     private JButton saca;
     private JButton emiteExtrato;
@@ -46,6 +56,34 @@ public class SavingsAccountView extends JFrame {
         depositar = new JButton ("Depositar");
         voltar = new JButton("Logout");
 
+        emiteExtrato.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Função ainda não implementada!" );
+			}
+		});
+        
+        depositar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				depositView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				setVisible(false);
+				
+			}
+		});
+        
+        saca.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				withdrawView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				setVisible(false);
+				
+			}
+		});
+        
         consultaInfo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -83,6 +121,8 @@ public class SavingsAccountView extends JFrame {
 
 		setLocation(640, 260);
 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		

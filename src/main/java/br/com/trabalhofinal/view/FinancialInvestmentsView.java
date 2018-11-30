@@ -92,7 +92,7 @@ public class FinancialInvestmentsView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				final Double calculaInvestimento = calculaInvestimento(inputValorMensal.getText().trim(), inputNumeroMeses.getText().trim());
-				mostraResultante.setText(calculaInvestimento.toString());
+				mostraResultante.setText("R$ "+calculaInvestimento.toString());
 				
 			}
 		});
@@ -128,6 +128,7 @@ public class FinancialInvestmentsView extends JFrame {
 		
 		setLocation(640, 260);
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);

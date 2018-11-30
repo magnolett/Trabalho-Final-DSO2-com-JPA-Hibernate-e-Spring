@@ -55,6 +55,7 @@ public class ExtractView extends JFrame {
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		pack();
 	}

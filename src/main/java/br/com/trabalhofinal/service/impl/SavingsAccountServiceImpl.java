@@ -3,6 +3,7 @@ package br.com.trabalhofinal.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.entities.SavingsAccount;
 import br.com.trabalhofinal.repository.SavingsAccountRepository;
 import br.com.trabalhofinal.service.SavingsAccountService;
@@ -31,7 +32,11 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
 	public SavingsAccount findByAccountNumberAndPassword(final String accountNumber, final String accountPassword) {
 		return savingsAccountRepository.findByAccountNumberAndPassword(accountNumber, accountPassword);
-		
+
 	}
 
+	@Override
+	public SavingsAccount findByCostumerInfo(CustomerInfo customerInfo) {
+		return savingsAccountRepository.findByCostumerInfo(customerInfo);
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.CheckingAccount;
+import br.com.trabalhofinal.entities.CustomerInfo;
 
 @Component
 public interface CheckingAccountRepository extends JpaRepository<CheckingAccount, Long> {
@@ -14,4 +15,7 @@ public interface CheckingAccountRepository extends JpaRepository<CheckingAccount
 	public CheckingAccount findByAccountNumberAndPassword(@Param("accountNumber") 
 	final String accountNumber, @Param("accountPassword") final String accountPassword);
 
+	@Query("SELECT c FROM CheckingAccount c where c.customerInfo = :customerInfoId")
+	public CheckingAccount findByCostumerInfo(@Param("customerInfoId") final Long customerInfoId);
+	
 }

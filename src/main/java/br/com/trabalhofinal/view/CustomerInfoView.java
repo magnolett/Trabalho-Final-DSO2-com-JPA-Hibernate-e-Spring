@@ -114,6 +114,8 @@ public class CustomerInfoView extends JFrame {
 		add(showEndereco);
 		add(showRenda);
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		setLocation(640, 260);
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());

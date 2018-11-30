@@ -2,6 +2,8 @@ package br.com.trabalhofinal.entities;
 
 import javax.persistence.MappedSuperclass;
 
+import org.springframework.stereotype.Component;
+
 @MappedSuperclass
 public abstract class Transaction {
 
