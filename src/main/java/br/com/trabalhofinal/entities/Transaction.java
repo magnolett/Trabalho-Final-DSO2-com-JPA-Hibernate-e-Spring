@@ -1,11 +1,6 @@
 package br.com.trabalhofinal.entities;
 
-import javax.persistence.MappedSuperclass;
-
-import org.springframework.stereotype.Component;
-
-@MappedSuperclass
-public abstract class Transaction {
+public class Transaction {
 
 	private Long value;
 

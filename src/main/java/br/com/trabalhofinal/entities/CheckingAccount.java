@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CHECKING_ACCOUNT")
-public class CheckingAccount {
+public class CheckingAccount extends Transaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +28,15 @@ public class CheckingAccount {
 	@OneToOne
 	private CustomerInfo customerInfo;
 	
+	@Column
+	private Long bankValue;
+	
 	public CheckingAccount(String accountNumber, String accountPassword, Long accountBalance, CustomerInfo customerInfo) {
 		this.accountBalance = accountBalance;
 		this.accountNumber = accountNumber;
 		this.accountPassword = accountPassword;
 		this.customerInfo = customerInfo;
+		this.bankValue = super.getValue();
 	}
 	
 	public CheckingAccount() {}
