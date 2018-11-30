@@ -53,7 +53,7 @@ public class FinancialInvestmentsView extends JFrame {
 		inputNumeroMeses = new JTextField(5);
 		valorMensal = new JLabel("Valor Mensal");
 		numeroMeses = new JLabel("Número de Meses");
-		valorResultante = new JLabel("Rendimento Final");
+		valorResultante = new JLabel("Lucro Final");
 		mostraResultante = new JTextField(5);
 		menuAnterior = new JButton("Voltar ao Menu Anterior");
 
@@ -61,6 +61,28 @@ public class FinancialInvestmentsView extends JFrame {
 		buttonGroup.add(rendaFixa);
 		buttonGroup.add(rendaVariavel);
 
+		realizarInvestimento.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(mostraResultante.getText() != null && !mostraResultante.getText().isEmpty()) {
+						final Double valor = Double.valueOf(inputValorMensal.getText());
+						final Double meses = Double.valueOf(inputNumeroMeses.getText());
+						final Double investimento = valor*meses;
+						final Double lucro = investimento + (investimento*jurosMensal);
+						
+						JOptionPane.showMessageDialog(null, "Valor investido: R$" + investimento + " >> Valor final (soma do investimento ao rendimento): R$ " + lucro);
+					}
+				} catch (Exception ex) {
+					if(ex instanceof NullPointerException) {
+						JOptionPane.showMessageDialog(null, "Há campos em branco!");
+					}
+				}
+				
+			}
+		});
+		
 		menuAnterior.addActionListener(new ActionListener() {
 			
 			@Override
