@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.AccountType;
-import br.com.trabalhofinal.entities.Authentication;
+import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.service.CustomerInfoService;
 
 @Component
@@ -45,6 +45,8 @@ public class SavingsAccountView extends JFrame {
     private JLabel contaPoupanca;
     private JButton depositar; 
     private JButton voltar;
+    
+    private CustomerInfo customerInfo;
 
     @PostConstruct
     public void initComponents() {
@@ -68,7 +70,7 @@ public class SavingsAccountView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				depositView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				depositView.criaTela(customerInfo);
 				setVisible(false);
 				
 			}
@@ -78,7 +80,7 @@ public class SavingsAccountView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				withdrawView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				withdrawView.criaTela(customerInfo);
 				setVisible(false);
 				
 			}
@@ -88,7 +90,7 @@ public class SavingsAccountView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				customerInfoView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT));
+				customerInfoView.criaTela(customerInfo);
 				setVisible(false);
 			}
 		});
@@ -130,6 +132,8 @@ public class SavingsAccountView extends JFrame {
     }
     
     public void criaTela() {
-        setVisible (true);
+		final CustomerInfo customerInfo = customerInfoService.findCustomerByAccountType(AccountType.SAVINGS_ACCOUNT);
+		this.customerInfo = customerInfo;
+		setVisible (true);
     }
 }

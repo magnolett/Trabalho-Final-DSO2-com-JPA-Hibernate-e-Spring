@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.dom4j.tree.DefaultProcessingInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,12 +34,10 @@ public class DepositView extends JFrame {
 
 	@Autowired
 	private SavingsAccountService savingsAccountService;
-	
+
 	@Autowired
 	private CheckingAccountService checkingAccountService;
-	
-	
-	
+
 	private JLabel realizaDeposito;
 	private JLabel valorDeposito;
 	private JTextField inputDeposito;
@@ -73,33 +72,34 @@ public class DepositView extends JFrame {
 		voltar.setBounds(220, 120, 100, 25);
 
 		depositar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(inputDeposito.getText() != null && !inputDeposito.getText().replaceAll("\\D", "").isEmpty()) {
+				if (inputDeposito.getText() != null && !inputDeposito.getText().replaceAll("\\D", "").isEmpty()) {
 					depositValue = Long.valueOf(inputDeposito.getText());
+					depositCalculator();
 				} else {
 					JOptionPane.showMessageDialog(null, "Apenas números! Não deixe o campo em branco!");
 				}
-				
+
 			}
 		});
-		
+
 		voltar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
+				if (customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
 					checkingAccountView.criaTela();
 					setVisible(false);
-					
-				} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)){
+
+				} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)) {
 					savingsAccountView.criaTela();
 					setVisible(false);
 				}
 			}
 		});
-		
+
 		setLocation(640, 260);
 
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -111,8 +111,12 @@ public class DepositView extends JFrame {
 	}
 
 	public void criaTela(final CustomerInfo customerInfo) {
-		
+
 		this.customerInfo = customerInfo;
+		setVisible(true);
+	}
+
+	public void depositCalculator() {
 		
 		try {
 			if(customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
@@ -124,6 +128,7 @@ public class DepositView extends JFrame {
 				JOptionPane.showMessageDialog(null, "Saldo Antigo: R$ " + oldValue);
 				JOptionPane.showMessageDialog(null, "Saldo Novo: R$ " + checkingAccount.getAccountBalance());
 				
+				checkingAccountService.save(checkingAccount);
 			} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)){
 				
 				final SavingsAccount savingsAccount = savingsAccountService.findByCostumerInfo(customerInfo);
@@ -132,16 +137,13 @@ public class DepositView extends JFrame {
 			
 				JOptionPane.showMessageDialog(null, "Saldo Antigo: R$ " + oldValue);
 				JOptionPane.showMessageDialog(null, "Saldo Novo: R$ " + savingsAccount.getAccountBalance());
-				
+
+				savingsAccountService.save(savingsAccount);
 			} else {
 				JOptionPane.showMessageDialog(null, "Problema não mapeado no sistema!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		setVisible(true);
 	}
-
 }

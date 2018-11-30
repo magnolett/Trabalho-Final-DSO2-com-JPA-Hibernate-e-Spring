@@ -15,7 +15,7 @@ public interface CheckingAccountRepository extends JpaRepository<CheckingAccount
 	public CheckingAccount findByAccountNumberAndPassword(@Param("accountNumber") 
 	final String accountNumber, @Param("accountPassword") final String accountPassword);
 
-	@Query("SELECT c FROM CheckingAccount c where c.customerInfo = :customerInfoId")
+	@Query("SELECT c FROM CheckingAccount c where c.customerInfo.id = :customerInfoId")
 	public CheckingAccount findByCostumerInfo(@Param("customerInfoId") final Long customerInfoId);
 	
 }

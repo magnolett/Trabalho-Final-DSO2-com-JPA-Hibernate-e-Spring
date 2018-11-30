@@ -46,8 +46,8 @@ public class Application implements CommandLineRunner{
 		CustomerInfo customerInfoSavings = new CustomerInfo("Luiz", "Fernando", "44433322211", "Rua YX", "5000", 
 				AccountType.SAVINGS_ACCOUNT);
 		
-		SavingsAccount savingsAccount = new SavingsAccount("123", "123", 6000l, customerInfoCheck);
-		CheckingAccount checkingAccount = new CheckingAccount("abc", "abc", 10000l, customerInfoSavings);
+		SavingsAccount savingsAccount = new SavingsAccount("123", "123", 6000l, customerInfoSavings);
+		CheckingAccount checkingAccount = new CheckingAccount("abc", "abc", 10000l, customerInfoCheck);
 		
 		customerInfoService.save(customerInfoCheck);
 		customerInfoService.save(customerInfoSavings);
@@ -63,7 +63,8 @@ public class Application implements CommandLineRunner{
 	
 	public static void main(final String[] args) {	
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-		
+		AuthenticationView bean = context.getBean(AuthenticationView.class);
+        bean.setVisible(true);
 	}
 
 	

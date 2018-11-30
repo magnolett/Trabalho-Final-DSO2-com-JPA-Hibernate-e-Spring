@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.PostConstruct;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.AccountType;
+import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.service.CustomerInfoService;
 
 @Component
@@ -48,11 +50,9 @@ public class CheckingAccountView extends JFrame {
 	private JButton depositar;
 	private JButton logout;
 
-	public CheckingAccountView() {
-		initComponents();
-
-	}
-
+	private CustomerInfo customerInfo;
+	
+	@PostConstruct
 	public void initComponents() {
 
 		consulta = new JButton("Consultar Informações");
@@ -62,7 +62,7 @@ public class CheckingAccountView extends JFrame {
 		emitirExtrato = new JButton("Emitir Extrato");
 		depositar = new JButton("Depositar");
 		logout = new JButton("Logout");
-
+		
 		emitirExtrato.addActionListener(new ActionListener() {
 			
 			@Override
@@ -75,7 +75,8 @@ public class CheckingAccountView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				depositView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+				System.out.println();
+				depositView.criaTela(customerInfo);
 				setVisible(false);
 				
 			}
@@ -85,7 +86,7 @@ public class CheckingAccountView extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				withdrawView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+				withdrawView.criaTela(customerInfo);
 				setVisible(false);
 				
 			}
@@ -104,7 +105,7 @@ public class CheckingAccountView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				customerInfoView.criaTela(customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT));
+				customerInfoView.criaTela(customerInfo);
 				setVisible(false);
 			}
 		});
@@ -150,10 +151,9 @@ public class CheckingAccountView extends JFrame {
 	}
 
 	public void criaTela() {
-
-		initComponents();
+		final CustomerInfo customerInfo = customerInfoService.findCustomerByAccountType(AccountType.CHECKING_ACCOUNT);
+		this.customerInfo = customerInfo;
 		setVisible(true);
-
 	}
 
 }

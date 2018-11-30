@@ -53,7 +53,7 @@ public class FinancialInvestmentsView extends JFrame {
 		inputNumeroMeses = new JTextField(5);
 		valorMensal = new JLabel("Valor Mensal");
 		numeroMeses = new JLabel("Número de Meses");
-		valorResultante = new JLabel("Valor Resultante");
+		valorResultante = new JLabel("Rendimento Final");
 		mostraResultante = new JTextField(5);
 		menuAnterior = new JButton("Voltar ao Menu Anterior");
 
@@ -147,7 +147,7 @@ public class FinancialInvestmentsView extends JFrame {
 			if(valorMensal != null && numeroMes != null) {
 				final Double valorMensalDouble = Double.valueOf(valorMensal);
 				final Double numeroMesesDouble = Double.valueOf(inputNumeroMeses.getText());
-				return valorMensalDouble+((valorMensalDouble * numeroMesesDouble)/jurosMensal);
+				return ((valorMensalDouble * numeroMesesDouble)*jurosMensal);
 
 			} else {
 				JOptionPane.showMessageDialog(null, "Número de meses e valor mensal depositado precisam de preenchimento!");

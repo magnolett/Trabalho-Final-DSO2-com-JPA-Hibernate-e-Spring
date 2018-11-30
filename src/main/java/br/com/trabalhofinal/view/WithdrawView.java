@@ -57,33 +57,34 @@ public class WithdrawView extends JFrame {
 		voltar = new JButton("Voltar");
 
 		sacar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(inputValorSaque.getText() != null && !inputValorSaque.getText().replaceAll("\\D", "").isEmpty()) {
+				if (inputValorSaque.getText() != null && !inputValorSaque.getText().replaceAll("\\D", "").isEmpty()) {
 					withdrawValue = Long.valueOf(inputValorSaque.getText());
+					withdrawCalculator();
 				} else {
-					JOptionPane.showMessageDialog(null, "Apenas números! Não deixe o campo em branco!");
+					JOptionPane.showMessageDialog(null, "Apenas números e não deixe o campo em branco!");
 				}
-				
+
 			}
 		});
-		
+
 		voltar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
+				if (customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
 					checkingAccountView.criaTela();
 					setVisible(false);
-					
-				} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)){
+
+				} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)) {
 					savingsAccountView.criaTela();
 					setVisible(false);
 				}
 			}
 		});
-		
+
 		setPreferredSize(new Dimension(394, 200));
 		setLayout(null);
 
@@ -102,7 +103,7 @@ public class WithdrawView extends JFrame {
 		setLocation(640, 260);
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(groupLayout);
 
@@ -110,11 +111,15 @@ public class WithdrawView extends JFrame {
 	}
 
 	public void criaTela(final CustomerInfo customerInfo) {
-		
+
 		this.customerInfo = customerInfo;
-		
+		setVisible(true);
+	}
+
+	public void withdrawCalculator() {
+
 		try {
-			if(customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
+			if (customerInfo.getAccountType().equals(AccountType.CHECKING_ACCOUNT)) {
 
 				final CheckingAccount checkingAccount = checkingAccountService.findByCostumerInfo(customerInfo.getId());
 				final Long oldValue = checkingAccount.getAccountBalance();
@@ -123,23 +128,24 @@ public class WithdrawView extends JFrame {
 				JOptionPane.showMessageDialog(null, "Saldo Antigo: R$ " + oldValue);
 				JOptionPane.showMessageDialog(null, "Saldo Novo: R$ " + checkingAccount.getAccountBalance());
 				
-			} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)){
-				
+				checkingAccountService.save(checkingAccount);
+
+			} else if (customerInfo.getAccountType().equals(AccountType.SAVINGS_ACCOUNT)) {
+
 				final SavingsAccount savingsAccount = savingsAccountService.findByCostumerInfo(customerInfo);
 				final Long oldValue = savingsAccount.getAccountBalance();
 				savingsAccount.setAccountBalance(savingsAccount.getAccountBalance() - withdrawValue);
-			
+
 				JOptionPane.showMessageDialog(null, "Saldo Antigo: R$ " + oldValue);
 				JOptionPane.showMessageDialog(null, "Saldo Novo: R$ " + savingsAccount.getAccountBalance());
-				
+
+				savingsAccountService.save(savingsAccount);
+
 			} else {
 				JOptionPane.showMessageDialog(null, "Problema não mapeado no sistema!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		setVisible(true);
 	}
 }

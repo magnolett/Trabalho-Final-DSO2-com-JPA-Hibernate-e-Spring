@@ -1,8 +1,6 @@
 package br.com.trabalhofinal.view;
 
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.entities.AccountType;
+import br.com.trabalhofinal.entities.CustomerInfo;
 import br.com.trabalhofinal.service.CheckingAccountService;
 import br.com.trabalhofinal.service.SavingsAccountService;
 
